@@ -30,6 +30,13 @@ public class HealthBehavior : MonoBehaviour
         return damageAmount;
     }
 
+    public virtual float IncreaseHealth(float healAmount)
+    {
+        _health += healAmount;
+
+        return healAmount;
+    }
+
     public virtual void OnDeath()
     {
 

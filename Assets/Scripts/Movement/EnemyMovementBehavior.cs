@@ -10,6 +10,9 @@ public class EnemyMovementBehavior : MovementBehavior
     [SerializeField]
     private float _enemyMoveSpeed;
 
+    [SerializeField]
+    private float _dropAmount;
+
     public Transform Target
     {
         get { return _target; }
@@ -38,9 +41,12 @@ public class EnemyMovementBehavior : MovementBehavior
     {
         if (other.transform == Target)
         {
-            PlayerInputBehavior character = other.GetComponent<PlayerInputBehavior>();
+            HealthBehavior character = other.GetComponent<HealthBehavior>();
             if (character)
-                character.();
+                character.TakeDamage(1);
+            MoneyBehavior characterMoney = other.GetComponent<MoneyBehavior>();
+            if (characterMoney)
+                characterMoney.AddMoney(_dropAmount);
 
             Destroy(gameObject);
         }

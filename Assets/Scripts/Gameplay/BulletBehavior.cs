@@ -45,11 +45,15 @@ public class BulletBehavior : MonoBehaviour
         if (other.CompareTag(OwnerTag))
             return;
 
+        if (other.tag == "Enemy")
+        {
+            HealthBehavior otherHealth = other.GetComponent<HealthBehavior>();
+            if (otherHealth)
+                otherHealth.TakeDamage(_damage);
+        }
+
         if (_destroyOnHit)
             Destroy(gameObject);
-
-        if (other.tag == "Enemy")
-            Destroy(other.gameObject);
     }
 
     private void Update()
