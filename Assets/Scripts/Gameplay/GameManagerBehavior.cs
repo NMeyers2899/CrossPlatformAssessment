@@ -24,7 +24,8 @@ public class GameManagerBehavior : MonoBehaviour
         if (_playerMoney.MoneyAmount >= _attackUpgradeButton.Cost)
         {
             _playerMoney.DecreaseMoney(_attackUpgradeButton.Cost);
-            _playerGun.DamageMultiplier *= 1.25f;
+            _playerGun.DamageMultiplier += 0.35f;
+            _attackUpgradeButton.Cost *= 1.25f;
         }
     }
 
@@ -34,6 +35,7 @@ public class GameManagerBehavior : MonoBehaviour
         {
             _playerMoney.DecreaseMoney(_healthUpgradeButton.Cost);
             _playerHealth.IncreaseHealth(1);
+            _healthUpgradeButton.Cost *= 1.45f;
         }
     }
 }

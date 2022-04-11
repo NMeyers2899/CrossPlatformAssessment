@@ -17,10 +17,12 @@ public class UpgradeButtonTextBehavior : MonoBehaviour
     public float Cost
     {
         get { return _cost; }
+        set { _cost = value; }
     }
 
     private void Update()
     {
-        _textBox.text = _upgradeText + " : " + _cost; 
+        _cost = (Mathf.Round(_cost * 100)) / 100;
+        _textBox.text = _upgradeText + " : $" + _cost; 
     }
 }

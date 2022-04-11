@@ -112,6 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 0}
   _enemyMoveSpeed: 6
+  _dropAmount: 10
 --- !u!114 &3878154688806649505
 MonoBehaviour:
   m_ObjectHideFlags: 0

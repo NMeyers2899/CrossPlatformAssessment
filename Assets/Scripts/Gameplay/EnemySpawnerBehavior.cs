@@ -34,11 +34,15 @@ public class EnemySpawnerBehavior : MonoBehaviour
 
     private void Update()
     {
-        if (_timer >= SpawnTime)
+        if (_timer >= SpawnTime && EnemyTarget)
         {
             EnemyMovementBehavior spawnedEnemy = Instantiate(_enemy, transform.position, transform.rotation);
             spawnedEnemy.Target = _enemyTarget;
             _timer = 0.0f;
+
+            HealthBehavior enemyHealth = spawnedEnemy.GetComponent<HealthBehavior>();
+            if (enemyHealth)
+                enemyHealth.IncreaseHealth(1.25f);
         }
 
         _timer += Time.deltaTime;

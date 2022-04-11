@@ -15,10 +15,12 @@ public class MoneyBehavior : MonoBehaviour
     public void AddMoney(float amount)
     {
         _moneyAmount += amount;
+        _moneyAmount = (Mathf.Round(_moneyAmount * 100)) / 100;
     }
 
     public void DecreaseMoney(float amount)
     {
         _moneyAmount -= amount;
+        _moneyAmount = (Mathf.Round(_moneyAmount * 100)) / 100;
     }
 }

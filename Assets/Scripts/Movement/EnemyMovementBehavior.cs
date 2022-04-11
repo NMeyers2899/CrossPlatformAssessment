@@ -44,11 +44,15 @@ public class EnemyMovementBehavior : MovementBehavior
             HealthBehavior character = other.GetComponent<HealthBehavior>();
             if (character)
                 character.TakeDamage(1);
-            MoneyBehavior characterMoney = other.GetComponent<MoneyBehavior>();
-            if (characterMoney)
-                characterMoney.AddMoney(_dropAmount);
 
             Destroy(gameObject);
+        }
+
+        if(other.transform != Target && other.CompareTag("Bullet"))
+        {
+            MoneyBehavior characterMoney = Target.GetComponent<MoneyBehavior>();
+            if (characterMoney)
+                characterMoney.AddMoney(_dropAmount);
         }
     }
 }
