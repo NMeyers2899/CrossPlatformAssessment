@@ -41,9 +41,14 @@ public class EnemyMovementBehavior : MovementBehavior
     {
         if (other.transform == Target)
         {
-            HealthBehavior character = other.GetComponent<HealthBehavior>();
-            if (character)
-                character.TakeDamage(1);
+            HealthBehavior characterHealth = other.GetComponent<HealthBehavior>();
+            if (characterHealth)
+                characterHealth.TakeDamage(1);
+            if(characterHealth.Health <= 0)
+            {
+                PlayerInputBehavior player = other.GetComponent<PlayerInputBehavior>();
+                player.Destroy();
+            }
 
             Destroy(gameObject);
         }

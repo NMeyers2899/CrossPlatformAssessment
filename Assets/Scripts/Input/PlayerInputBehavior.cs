@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerInputBehavior : MonoBehaviour
 {
@@ -16,6 +17,12 @@ public class PlayerInputBehavior : MonoBehaviour
     [SerializeField]
     private Camera _mainCamera;
 
+    [SerializeField]
+    private Button _returnButton;
+
+    [SerializeField]
+    private Text _deathText;
+
     private void Update()
     {
         // The information of what the ray will hit.
@@ -28,5 +35,17 @@ public class PlayerInputBehavior : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
             _gun.Fire();
+    }
+
+    public void Destroy()
+    {
+        OnDeath();
+        Destroy(gameObject);
+    }
+
+    public void OnDeath()
+    {
+        _deathText.enabled = true;
+        _returnButton.gameObject.SetActive(true);
     }
 }
