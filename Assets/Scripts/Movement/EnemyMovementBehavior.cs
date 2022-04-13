@@ -10,6 +10,9 @@ public class EnemyMovementBehavior : MovementBehavior
     [SerializeField]
     private float _enemyMoveSpeed;
 
+    /// <summary>
+    /// The amount of money this enemy will drop on death.
+    /// </summary>
     [SerializeField]
     private float _dropAmount;
 
@@ -33,6 +36,8 @@ public class EnemyMovementBehavior : MovementBehavior
             Vector3 direction = Target.position - transform.position;
             Velocity = direction.normalized * EnemyMoveSpeed;
         }
+        else
+            Destroy(gameObject);
 
         base.Update();
     }
@@ -41,11 +46,14 @@ public class EnemyMovementBehavior : MovementBehavior
     {
         if (other.transform == Target)
         {
+            // Finds the health behavior of the target, and then has that target take one damage if that health behavior exists.
             HealthBehavior characterHealth = other.GetComponent<HealthBehavior>();
             if (characterHealth)
                 characterHealth.TakeDamage(1);
+            // If their health is less than or equal to zero...
             if(characterHealth.Health <= 0)
             {
+                // ...call their destroy function.
                 PlayerInputBehavior player = other.GetComponent<PlayerInputBehavior>();
                 player.Destroy();
             }
@@ -55,6 +63,7 @@ public class EnemyMovementBehavior : MovementBehavior
 
         if(other.transform != Target && other.CompareTag("Bullet"))
         {
+            // Adds money to the character's total.
             MoneyBehavior characterMoney = Target.GetComponent<MoneyBehavior>();
             if (characterMoney)
                 characterMoney.AddMoney(_dropAmount);
