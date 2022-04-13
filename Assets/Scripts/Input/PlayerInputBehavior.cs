@@ -20,9 +20,6 @@ public class PlayerInputBehavior : MonoBehaviour
     [SerializeField]
     private Button _returnButton;
 
-    [SerializeField]
-    private Text _deathText;
-
     private void Update()
     {
         // The information of what the ray will hit.
@@ -45,7 +42,6 @@ public class PlayerInputBehavior : MonoBehaviour
 
     public void OnDeath()
     {
-        _deathText.enabled = true;
         _returnButton.gameObject.SetActive(true);
     }
 }
