@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemySpawnerBehavior : MonoBehaviour
 {
     [SerializeField]
-    private EnemyMovementBehavior _enemy;
+    private EnemyMovementBehavior _enemy, _regularEnemy, _fastEnemy, _slowEnemy;
 
     [SerializeField]
     private Transform _enemyTarget;
@@ -44,6 +44,19 @@ public class EnemySpawnerBehavior : MonoBehaviour
     {
         if (_timer >= SpawnTime && EnemyTarget)
         {
+            // Resets the base spawn time and then makes it longer or shorter at random.
+            _spawnTime = 5.0f;
+            float respawnTime = Random.Range(-1, 11);
+            _spawnTime += respawnTime;
+
+            float enemyChance = Random.Range(1, 101);
+            if (enemyChance >= 1 && enemyChance <= 50)
+                _enemy = _regularEnemy;
+            else if (enemyChance >= 51 && enemyChance <= 80)
+                _enemy = _fastEnemy;
+            else if (enemyChance >= 81 && enemyChance <= 100)
+                _enemy = _slowEnemy;
+
             EnemyMovementBehavior spawnedEnemy = Instantiate(_enemy, transform.position, transform.rotation);
             spawnedEnemy.Target = _enemyTarget;
             _timer = 0.0f;
