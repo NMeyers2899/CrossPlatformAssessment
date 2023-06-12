@@ -50,6 +50,8 @@ public class BulletBehavior : MonoBehaviour
             HealthBehavior otherHealth = other.GetComponent<HealthBehavior>();
             if (otherHealth)
                 otherHealth.TakeDamage(_damage);
+            if (otherHealth.Health <= 0)
+                GameManagerBehavior.IncreaseEnemiesDefeated();
         }
 
         if (_destroyOnHit)

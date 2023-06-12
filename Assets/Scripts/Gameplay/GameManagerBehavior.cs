@@ -20,6 +20,11 @@ public class GameManagerBehavior : MonoBehaviour
     [SerializeField]
     private UpgradeButtonTextBehavior _healthUpgradeButton;
 
+    [SerializeField]
+    private static int _enemiesDefeated;
+
+    public static int EnemiesDefeated { get { return _enemiesDefeated; } }
+
     public void UpgradePlayerDamage()
     {
         if (_playerMoney.MoneyAmount >= _attackUpgradeButton.Cost)
@@ -40,9 +45,15 @@ public class GameManagerBehavior : MonoBehaviour
         }
     }
 
+    public static void IncreaseEnemiesDefeated()
+    {
+        _enemiesDefeated++;
+    }
+
     public void PlayGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        _enemiesDefeated = 0;
     }
 
     public void ReturnToMenu()
