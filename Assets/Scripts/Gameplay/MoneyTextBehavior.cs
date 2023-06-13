@@ -19,7 +19,7 @@ public class MoneyTextBehavior : MonoBehaviour
         // Checks to see how much money the player has.
         float money = _player.MoneyAmount;
 
-        if (money == 0)
+        if (money < 0)
             money = 0;
 
         // Show the player how much money they have.

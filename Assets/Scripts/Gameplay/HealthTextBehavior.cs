@@ -17,7 +17,7 @@ public class HealthTextBehavior : MonoBehaviour
     {
         float health = _player.Health;
 
-        if (health <= 0)
+        if (health < 0)
             health = 0;
 
         _healthText.text = "Health : " + health;
