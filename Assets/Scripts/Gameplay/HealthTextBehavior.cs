@@ -8,9 +8,7 @@ public class HealthTextBehavior : MonoBehaviour
     [SerializeField]
     private Text _healthText;
 
-    /// <summary>
-    /// The health behavior that is attached to the player.
-    /// </summary>
+    [Tooltip("The health behavior that is attached to the player.")]
     [SerializeField]
     private HealthBehavior _player;
 

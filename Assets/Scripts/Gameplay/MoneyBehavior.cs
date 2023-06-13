@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class MoneyBehavior : MonoBehaviour
 {
+    [Tooltip("How much money this actor currently has.")]
     [SerializeField]
     private float _moneyAmount;
 
-    public float MoneyAmount
-    {
-        get { return _moneyAmount; }
-    }
+    /// <summary>
+    /// How much money this actor currently has.
+    /// </summary>
+    public float MoneyAmount { get { return _moneyAmount; } }
 
     /// <summary>
     /// Adds money to the actor's money total.

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class EnemiesDefeatedTextBehavior : MonoBehaviour
 {
+    [Tooltip("The text this script will modify.")]
     [SerializeField]
     private Text _enemiesDefeatedText;
 

@@ -4,24 +4,27 @@ using UnityEngine;
 
 public class HealthBehavior : MonoBehaviour
 {
+    [Tooltip("How much health this actor has.")]
     [SerializeField]
     private float _health;
 
+    [Tooltip("Checks to see if the actor is still alive.")]
     [SerializeField]
     private bool _isAlive;
 
+    [Tooltip("If true, the actor will be destroyed if it is considered dead.")]
     [SerializeField]
     private bool _destroyOnDeath;
 
-    public float Health
-    {
-        get { return _health; }
-    }
+    /// <summary>
+    /// How much health this actor has.
+    /// </summary>
+    public float Health { get { return _health; } }
 
-    public bool IsAlive
-    {
-        get { return _isAlive; }
-    }
+    /// <summary>
+    /// Checks to see if the actor is still alive.
+    /// </summary>
+    public bool IsAlive { get { return _isAlive; } }
 
     /// <summary>
     /// Decreases the health of the actor by a certain amount and returns the amount.

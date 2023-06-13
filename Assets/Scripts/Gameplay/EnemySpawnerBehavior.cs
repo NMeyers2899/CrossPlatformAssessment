@@ -4,51 +4,33 @@ using UnityEngine;
 
 public class EnemySpawnerBehavior : MonoBehaviour
 {
+    [Tooltip("The different types of enemies this spawner can make.")]
     [SerializeField]
     private EnemyMovementBehavior _enemy, _regularEnemy, _fastEnemy, _slowEnemy;
 
+    [Tooltip("The target the enemies will move towards.")]
     [SerializeField]
     private Transform _enemyTarget;
 
-    /// <summary>
-    /// How much the enemy's health will scale each time they spawn.
-    /// </summary>
+    [Tooltip("How much the enemy's health will scale each time they spawn.")]
     private float _healthMultiplier = 1f;
 
-    /// <summary>
-    /// The default time it takes an enemy to spawn.
-    /// </summary>
+    [Tooltip("The default time it takes an enemy to spawn.")]
     [SerializeField]
     private float _spawnTime = 5.0f;
     private float _timer = 0.0f;
 
-    public EnemyMovementBehavior Enemy
-    {
-        get { return _enemy; }
-        set { _enemy = value; }
-    }
-
-    public Transform EnemyTarget
-    {
-        get { return _enemyTarget; }
-        set { _enemyTarget = value; }
-    }
-
-    public float SpawnTime
-    {
-        get { return _spawnTime; }
-        set { _spawnTime = value; }
-    }
-
     private void Update()
     {
-        if (_timer >= SpawnTime && EnemyTarget)
+        // If the timer has counted past the alloted spawn time...
+        if (_timer >= _spawnTime && _enemyTarget)
         {
-            // Resets the base spawn time and then makes it longer or shorter at random.
+            // ...resets the base spawn time and then makes it longer or shorter at random.
             _spawnTime = 5.0f;
             float respawnTime = Random.Range(-1, 11);
             _spawnTime += respawnTime;
 
+            // Finds a random number between 1 and 100 and changes which enemy will spawn based on that number.
             float enemyChance = Random.Range(1, 101);
             if (enemyChance >= 1 && enemyChance <= 50)
                 _enemy = _regularEnemy;
@@ -57,6 +39,7 @@ public class EnemySpawnerBehavior : MonoBehaviour
             else if (enemyChance >= 81 && enemyChance <= 100)
                 _enemy = _slowEnemy;
 
+            // Spawns an enemy and resets the timer.
             EnemyMovementBehavior spawnedEnemy = Instantiate(_enemy, transform.position, transform.rotation);
             spawnedEnemy.Target = _enemyTarget;
             _timer = 0.0f;
@@ -72,6 +55,7 @@ public class EnemySpawnerBehavior : MonoBehaviour
                 
         }
 
+        // Increase the timer.
         _timer += Time.deltaTime;
     }
 }

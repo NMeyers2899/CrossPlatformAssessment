@@ -4,38 +4,33 @@ using UnityEngine;
 
 public class EnemyMovementBehavior : MovementBehavior
 {
+    [Tooltip("The target this enemy will move towards.")]
     [SerializeField]
     private Transform _target;
 
+    [Tooltip("How fast this enemy will move.")]
     [SerializeField]
     private float _enemyMoveSpeed;
 
-    /// <summary>
-    /// The amount of money this enemy will drop on death.
-    /// </summary>
+    [Tooltip("The amount of money this enemy will drop on death.")]
     [SerializeField]
     private float _dropAmount;
 
-    public Transform Target
-    {
-        get { return _target; }
-        set { _target = value; }
-    }
+    /// <summary>
+    /// The target this enemy will move towards.
+    /// </summary>
+    public Transform Target { get { return _target; } set { _target = value; } }
 
-    public float EnemyMoveSpeed
-    {
-        get { return _enemyMoveSpeed; }
-    }
-
-    // Update is called once per frame
     public override void Update()
     {
+        // If there is a target...
         if (Target)
         {
-            // Getting the distance between the enemy and the target.
+            // ...get the distance between the enemy and the target.
             Vector3 direction = Target.position - transform.position;
-            Velocity = direction.normalized * EnemyMoveSpeed;
+            Velocity = direction.normalized * _enemyMoveSpeed;
         }
+        // If there is not a target, destroy this actor.
         else
             Destroy(gameObject);
 
@@ -44,7 +39,7 @@ public class EnemyMovementBehavior : MovementBehavior
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform == Target)
+        if (other.transform == _target)
         {
             // Finds the health behavior of the target, and then has that target take one damage if that health behavior exists.
             HealthBehavior characterHealth = other.GetComponent<HealthBehavior>();
